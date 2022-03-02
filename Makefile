@@ -6,17 +6,23 @@
 #    By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/19 11:24:00 by jpizarro          #+#    #+#              #
-#    Updated: 2022/02/25 07:16:18 by jpizarro         ###   ########.fr        #
+#    Updated: 2022/03/02 07:11:41 by jpizarro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean debug fclean re run show
+.PHONY: all bonus clean debug fclean re run show
 
 NAME = pipex
 
-SRCS =	$(wildcard srcs/*.c)
+SRCS =	srcs/data_init.c srcs/error_exit.c srcs/exec_cmd.c srcs/exec_cmds.c srcs/get_env_path.c srcs/get_files.c srcs/get_path.c srcs/perror_exit.c srcs/pipex.c
 
-OBJS = $(SRCS:.c=.o)
+CHECK = srcs/check_argc.c
+
+CHECK-BON = srcs/check_argc_bonus.c
+
+OBJS = $(SRCS:.c=.o) $(CHECK:.c=.o)
+
+OBJS-BON = $(SRCS:.c=.o) $(CHECK-BON:.c=.o)
 
 LIBS = libft/libft.h
 
@@ -35,6 +41,11 @@ $(NAME): $(OBJS) $(STATICS)
 	$(CC) $(CFLAGS) $(OBJS) $(STATICS) -o $@
 	@echo "$@ is ready!"
 
+bonus: $(OBJS-BON) $(STATICS)
+	@echo "Creating $@"
+	$(CC) $(CFLAGS) $(OBJS-BON) $(STATICS) -o $(NAME)
+	@echo "$@ is ready!"
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
@@ -43,22 +54,19 @@ $(STATICS):
 
 clean:
 	@echo "Cleaing up binary files"
-	$(RM) $(OBJS) *.out
+	$(RM) $(OBJS)
 	cd libft/ && $(MAKE) $@
 
 fclean: clean
 	@echo "also $(NAME), debug and .bmp files"
 	$(RM) $(NAME) debug
-	$(RM) $(wildcard *.bmp)
+	$(RM) $(wildcard srcs/*.o)
+	$(RM) $(wildcard *.out)
 	cd libft/ && $(MAKE) $@
 
 re: fclean all
 
-run: all
-	./$(NAME) map.cub
-
-bmp: all
-	./$(NAME) map.cub --save
+rebonus: fclean bonus
 
 debug: fclean $(OBJS) $(STATICS)
 	@echo "Creating $@ file"
@@ -67,9 +75,10 @@ debug: fclean $(OBJS) $(STATICS)
 
 show:
 	@echo "SRCS $(SRCS)"
+	@echo "CHECK $(CHECK)"
+	@echo "CHECK-BON $(CHECK-BON)"
 	@echo "OBJS $(OBJS)"
-	@echo "MAKES $(MAKES)"
-	@echo "LIBFOLDERS $(LIBFOLDERS)"
+	@echo "OBJS-BON $(OBJS-BON)"
 	@echo "LIBS $(LIBS)"
-	@echo "statics $(STATICS)"
+	@echo "STATICS $(STATICS)"
 	

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 05:28:48 by jpizarro          #+#    #+#             */
-/*   Updated: 2022/03/02 06:34:33 by jpizarro         ###   ########.fr       */
+/*   Created: 2022/03/01 04:47:53 by jpizarro          #+#    #+#             */
+/*   Updated: 2022/03/01 04:54:14 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+/*
+**	Frees the structure that split does
+*/
 
-int		main(int argc, char *argv[], char *environ[])
+#include "libft.h"
+
+void	ft_free_split(char **split)
 {
-	t_pipex_data	data;
+	int	i;
 
-	data_init(&data);
-	check_argc(argc);
-	data.cmd_num = argc - 3;
-	get_files(argc, argv, &data);
-	exec_cmds(&data, argv, environ);
-	return (0);
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		split[i] = NULL;
+		i++;
+	}
+	free(split);
+	split = NULL;
 }

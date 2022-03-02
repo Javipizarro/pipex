@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 05:28:48 by jpizarro          #+#    #+#             */
-/*   Updated: 2022/03/02 06:34:33 by jpizarro         ###   ########.fr       */
+/*   Created: 2022/02/26 22:49:50 by jpizarro          #+#    #+#             */
+/*   Updated: 2022/03/02 06:22:45 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	 Ininitiates a pipex_data structure.
+*/
+
 #include "../pipex.h"
 
-int		main(int argc, char *argv[], char *environ[])
+void	data_init(t_pipex_data *data)
 {
-	t_pipex_data	data;
-
-	data_init(&data);
-	check_argc(argc);
-	data.cmd_num = argc - 3;
-	get_files(argc, argv, &data);
-	exec_cmds(&data, argv, environ);
-	return (0);
+	data->cmd_num = 0;
+	data->cmd = NULL;
+	data->infile = 0;
+	data->outfile = 0;
+	data->in_pipe[0] = -1;
+	data->in_pipe[1] = -1;
+	data->out_pipe[0] = 0;
+	data->out_pipe[1] = 0;
+	data->pid = 0;
 }

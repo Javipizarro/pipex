@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   check_argc_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 05:28:48 by jpizarro          #+#    #+#             */
-/*   Updated: 2022/03/02 06:34:33 by jpizarro         ###   ########.fr       */
+/*   Created: 2022/02/25 07:47:17 by jpizarro          #+#    #+#             */
+/*   Updated: 2022/03/02 06:35:46 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+/*
+**	Checks whether the number of arguments is 5
+**	Only valid for the non-bonus version!!
+*/
 
-int		main(int argc, char *argv[], char *environ[])
+# include "../pipex.h"
+
+void	check_argc(int argc)
 {
-	t_pipex_data	data;
-
-	data_init(&data);
-	check_argc(argc);
-	data.cmd_num = argc - 3;
-	get_files(argc, argv, &data);
-	exec_cmds(&data, argv, environ);
-	return (0);
+	char	*str;
+	
+	if (argc < 5)
+	{
+		str = "Wrong args, use:\n./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2\n";
+		error_exit(str);
+	}
 }

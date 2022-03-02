@@ -6,7 +6,7 @@
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 00:53:22 by jpizarro          #+#    #+#             */
-/*   Updated: 2021/05/20 10:51:00 by jpizarro         ###   ########.fr       */
+/*   Updated: 2022/03/01 05:36:57 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*ft_calloc(size_t count, size_t size);
 int		ft_charindex(char const *s, char c);
 void	*ft_charlloc(size_t len, char c);
 int		ft_charpos(char const *s, char c);
+void	ft_free_split(char **split);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
@@ -45,7 +46,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
-char	*ft_sjofree(char *s1, char *s2, short int fr);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);

@@ -1,0 +1,5 @@
+-rwxr-xr-x    1 javierpizarro  staff    34738 Mar  2 07:10 pipex
+-rw-r--r--    1 javierpizarro  staff     1785 Mar  2 06:31 pipex.h
+-rw-r--r--    1 javierpizarro  staff  1046596 Feb 25 06:19 pipex.h.gch
+-rw-r--r--  1 javierpizarro  staff  1133 Mar  2 06:34 pipex.c
+-rw-r--r--  1 javierpizarro  staff   760 Mar  2 07:10 pipex.o

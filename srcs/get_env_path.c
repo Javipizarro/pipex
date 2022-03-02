@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   get_env_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 05:28:48 by jpizarro          #+#    #+#             */
-/*   Updated: 2022/03/02 06:34:33 by jpizarro         ###   ########.fr       */
+/*   Created: 2022/03/01 05:20:57 by jpizarro          #+#    #+#             */
+/*   Updated: 2022/03/01 05:38:00 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	Finds the "PATH=" environ variable and retrurns it.
+*/
+
 #include "../pipex.h"
 
-int		main(int argc, char *argv[], char *environ[])
+char	*get_env_path(char *environ[])
 {
-	t_pipex_data	data;
+	int	i;
 
-	data_init(&data);
-	check_argc(argc);
-	data.cmd_num = argc - 3;
-	get_files(argc, argv, &data);
-	exec_cmds(&data, argv, environ);
-	return (0);
+	i = 0;
+	while (environ[i])
+	{
+		if (!ft_strncmp(environ[i], "PATH=", 5))
+			return (environ[i]);
+		i++;
+	}
+	return (NULL);
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpizarro <jpizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 05:28:48 by jpizarro          #+#    #+#             */
-/*   Updated: 2022/03/02 06:34:33 by jpizarro         ###   ########.fr       */
+/*   Created: 2022/02/27 12:31:45 by jpizarro          #+#    #+#             */
+/*   Updated: 2022/02/27 12:48:41 by jpizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	Exits the program displaying the str messages if there is any, and freeing
+**	the malloced memory.
+*/
+
 #include "../pipex.h"
 
-int		main(int argc, char *argv[], char *environ[])
+void	error_exit(char *str)
 {
-	t_pipex_data	data;
-
-	data_init(&data);
-	check_argc(argc);
-	data.cmd_num = argc - 3;
-	get_files(argc, argv, &data);
-	exec_cmds(&data, argv, environ);
-	return (0);
+	if (str)
+		write(2, str, ft_strlen(str));
+	// TODO: Free mallocs if they exists
+	exit(0);
 }
